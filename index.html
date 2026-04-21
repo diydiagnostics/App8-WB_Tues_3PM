@@ -108,7 +108,43 @@
 
           /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
           
-          
+           
+    //JavaScript variables to hold image data   
+    var imageData = context.getImageData(0, 0, 600, 500);
+    var colorData = imageData.data;
+
+    var red= 0;
+    var green= 0;
+    var pixelCount = 0;
+
+    for (var i = 0; i < colorData.length; i += 4) { //created a loop that is similar to the app 7 development. The loop itself goes through all the pixels in the image to create the intensity from red, blue, and green. An initial value of i is given as 0, and if i is lower than data.length then 4 is added to it.
+      red += colorData[i]; // this is the categorization of red. Everytime the loop goe
+      green += colorData[i + 1];
+      pixelCount++;
+    
+    // Optional: Keep blue channel as is to show "Blue" version on second canvas
+    colorData[i] = 0; 
+    colorData[i + 1] = 0; 
+    }
+
+    // Calculate the average color values
+    var avgRed = red / pixelCount;
+    var avgGreen = green / pixelCount;
+
+    // Diagnostic Determination: In LAMP, Yellow (Positive) has high Red AND Green. 
+    // Pink (Negative) has high Red but much lower Green. [cite: 13]
+    var diagnosticResult = "";
+      if (avgGreen > (avgRed * 0.8)) { // Threshold logic for "Yellowish"
+        diagnosticResult = "Positive (Yellow detected)";
+    } else {
+        diagnosticResult = "Negative (Pink/Red detected)";
+    }
+
+   // Presents the result to the user 
+   messageDisplayArea.innerHTML = "Analysis Complete: " + diagnosticResult;
+   context2.putImageData(imageData, 0, 0); 
+  /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
           
           
         } // end of img.onload
@@ -135,13 +171,13 @@
     <div data-role="content">	
       <h2>Push button to take picture.</h2>
       <div>
-        Press orange button to create or choose image file:
+        Press the orange button to create or choose an image file:
         <input type="file" id="fileInput" STYLE="background-color: #FF6600;">
       </div>
       <div id="messageDisplayArea"></div>
       
       <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
-      <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
+      <script> /* This script initiates the canvas and puts the text on the canvas "myCanvas" */
         var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext("2d");
         context.font = '20pt Calibri';
