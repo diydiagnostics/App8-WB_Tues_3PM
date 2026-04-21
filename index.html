@@ -14,12 +14,13 @@
  
   Authors in chronological order of contribution:
   Author 1: Timothy E. Riedel
-  Author 2: Ruhi Deshpande
-  Author 3: Chris Kurian
-  Author 4: Mayumi Lopez
-  Author 5: Grace Bello
-  Author 6: Nilou Chafi
-  Author 7: Abi Odufowokan
+  Author 2: Ruhi Deshpande 
+  Author 3: Mayumi Lopez 
+  Author 4: Abimbola Odufowokan 
+  Author 5: Nilou Chafi
+  Author 6: Chris Kurian
+  Author 7: Grace Bello
+  Author 9: Google Gemini AI
  
   
   References:
@@ -30,10 +31,10 @@
   http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
   
   Brief Description of Goal of Code:
-  blah, blah, blah,
+  Create variables to draw context for the canvas, bring the pixels and a space to store information. After this we added a loop to identify pixel coloration on the image by creating an average of each color. Lastly, create an if statement for the result printout that diagnoses positive- “yellow” if average green is above average red times 0.8, else negative - “Pink/Red detected”.
  
   Known Issues:
-  blah, blah, blah, blah
+  No known issues
 -->
 
  <head>
@@ -121,10 +122,7 @@
       red += colorData[i]; // this is the categorization of red. Everytime the loop goe
       green += colorData[i + 1];
       pixelCount++;
-    
-    // Optional: Keep blue channel as is to show "Blue" version on second canvas
-    colorData[i] = 0; 
-    colorData[i + 1] = 0; 
+     
     }
 
     // Calculate the average color values
